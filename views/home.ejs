@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Homepage</title>
+    <style>
+      .card img {
+        height: 200px;
+        object-fit: cover;
+        border-radius: 0.5rem 0.5rem 0 0;
+      }
+      .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+      .card-text {
+        height: 3rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .view-btn {
+        background-color: #0066cc;
+        border: none;
+        transition: background-color 0.3s ease;
+      }
+      .view-btn:hover {
+        background-color: #004d99;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./partials/nav') %>
+
+    <div class="container mt-5">
+      <div class="row g-4">
+        <% blogs.forEach(blog => { %>
+        <div class="col-lg-3 col-md-4 col-sm-6 d-flex align-items-stretch">
+          <div class="card shadow-sm rounded-lg">
+            <img src="<%= blog.coverImageURL %>" class="card-img-top" alt="<%= blog.title %>" />
+            <div class="card-body">
+              <h5 class="card-title"><%= blog.title %></h5>
+              <p class="card-text"><%= blog.body.substring(0, 100) %>...</p>
+              <a href="/blog/<%= blog._id %>" class="btn btn-primary view-btn">View Blog</a>
+            </div>
+            <div class="card-footer text-muted">
+              <small>By <%= blog.createdBy.fullName %></small>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+
+    <%- include('./partials/scripts') %>
+  </body>
+</html>
